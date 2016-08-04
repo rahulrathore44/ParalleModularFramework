@@ -1,5 +1,6 @@
 *.class
 
+
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 
@@ -40,8 +41,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# Windows
-# =========================
+# JDT-specific (Eclipse Java Development Tools)
+.classpath
 
 # Windows image file caches
 Thumbs.db
@@ -64,3 +65,4 @@ $RECYCLE.BIN/
 /target/
 /test-output/
 *.log
+.settings/
