@@ -12,7 +12,9 @@ import com.modular.parallel.helper.Browser.BrowserHelper;
 import com.modular.parallel.helper.Button.ButtonHelper;
 import com.modular.parallel.helper.CheckBox.CheckBoxOrRadioButtonHelper;
 import com.modular.parallel.helper.DropDown.DropDownHelper;
+import com.modular.parallel.helper.HyperLink.LinkHelper;
 import com.modular.parallel.helper.Javascript.JavaScriptHelper;
+import com.modular.parallel.helper.Navigation.NavigationHelper;
 import com.modular.parallel.helper.Wait.WaitHelper;
 import com.modular.parallel.interfaces.IconfigReader;
 
@@ -30,6 +32,8 @@ public class TestCaseBase extends InitializeWebDrive {
 	protected CheckBoxOrRadioButtonHelper chkBox;
 	protected WaitHelper wait;
 	protected DropDownHelper dropDown;
+	protected LinkHelper link;
+	protected NavigationHelper navigate;
 
 	void initializeComponent() throws Exception {
 		try {
@@ -47,6 +51,10 @@ public class TestCaseBase extends InitializeWebDrive {
 					IconfigReader.class).newInstance(getDriver(),
 					getConfigReader());
 			dropDown = DropDownHelper.class.getConstructor(WebDriver.class)
+					.newInstance(getDriver());
+			link = LinkHelper.class.getConstructor(WebDriver.class)
+					.newInstance(getDriver());
+			navigate = NavigationHelper.class.getConstructor(WebDriver.class)
 					.newInstance(getDriver());
 		} catch (Exception e) {
 			throw e;

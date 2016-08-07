@@ -34,4 +34,12 @@ public class TestDropDown extends TestCaseBase {
 		Assert.assertEquals(dropDown.getSelectedValue(By.id("trip")), "Round Trip");
 		
 	}
+	
+	@Test
+	public void linkHelperTest() {
+		getDriver().get("https://www.pluralsight.com/");
+		wait.elementExistAndVisible(By.partialLinkText("Business"), getConfigReader().getExplicitWait(), 250);
+		link.clickPartialLink("Business");
+		Assert.assertEquals(getDriver().getTitle(), "Group Plans | Pluralsight");
+	}
 }
