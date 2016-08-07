@@ -9,6 +9,7 @@
 	<test name="Test - 2" thread-count="1">
 		<classes>
 			<class name="com.modular.parallel.TestYoutube" />
+			<class name="com.modular.parallel.TestDropDown" />
 		</classes>
 	</test> <!-- Test -->
 	<test name="Test - 3" thread-count="1">
