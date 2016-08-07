@@ -5,11 +5,13 @@
  */
 package com.modular.parallel.helper.TextBox;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.modular.parallel.helper.Generic.GenericHelper;
+import com.modular.parallel.helper.Logger.LoggerHelper;
 
 /**
  * @author rahul.rathore
@@ -20,22 +22,26 @@ import com.modular.parallel.helper.Generic.GenericHelper;
 public class TextBoxHelper extends GenericHelper {
 
 	private WebDriver driver;
+	private Logger oLog = LoggerHelper.getLogger(TextBoxHelper.class);
 	
 	public TextBoxHelper(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
-		System.err.println("TextBoxHelper : " + this.driver.hashCode());
+		oLog.debug("TextBoxHelper : " + this.driver.hashCode());
 	}
 	
 	public void sendKeys(By locator,String value) {
+		oLog.info("Locator : " + locator + " Value : " + value);
 		getElement(locator).sendKeys(value);
 	}
 	
 	public void clear(By locator) {
+		oLog.info("Locator : " + locator);
 		getElement(locator).clear();
 	}
 	
 	public String getText(By locator) {
+		oLog.info("Locator : " + locator);
 		return getElement(locator).getText();
 	}
 	
@@ -43,6 +49,7 @@ public class TextBoxHelper extends GenericHelper {
 		WebElement element =  getElement(locator);
 		element.clear();
 		element.sendKeys(value);
+		oLog.info("Locator : " + locator + " Value : " + value);
 	}
 
 }

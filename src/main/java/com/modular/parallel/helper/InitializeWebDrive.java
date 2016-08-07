@@ -7,9 +7,9 @@ package com.modular.parallel.helper;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 
 import com.modular.parallel.configreader.PropertyFileReader;
 import com.modular.parallel.configuration.browser.ChromeBrowser;
@@ -18,6 +18,7 @@ import com.modular.parallel.configuration.browser.HtmlUnitBrowser;
 import com.modular.parallel.configuration.browser.IExploreBrowser;
 import com.modular.parallel.configuration.browser.PhantomJsBrowser;
 import com.modular.parallel.exception.NoSutiableDriverFoundException;
+import com.modular.parallel.helper.Logger.LoggerHelper;
 import com.modular.parallel.interfaces.IconfigReader;
 
 /**
@@ -30,6 +31,7 @@ public abstract class InitializeWebDrive {
 
 	private WebDriver driver;
 	private IconfigReader reader;
+	private Logger oLog = LoggerHelper.getLogger(InitializeWebDrive.class);
 
 	protected InitializeWebDrive() {
 		reader = new PropertyFileReader();
@@ -56,11 +58,9 @@ public abstract class InitializeWebDrive {
 		return reader;
 	}
 
-	// @BeforeTest
 	public void setUpDriver() throws Exception {
-
+		oLog.info(reader.getBrowser());
 		switch (reader.getBrowser()) {
-
 		case Chrome:
 			ChromeBrowser chrome = ChromeBrowser.class.newInstance();
 			driver = chrome.getChromeDriver(chrome.getChromeCapabilities());
@@ -94,19 +94,19 @@ public abstract class InitializeWebDrive {
 			throw new NoSutiableDriverFoundException(" Driver Not Found : "
 					+ reader.getBrowser());
 		}
-		System.err.println("InitializeWebDrive : " + this.driver.hashCode());
+		oLog.debug("InitializeWebDrive : " + this.driver.hashCode());
 		driver.manage().timeouts()
 				.pageLoadTimeout(reader.getPageLoadTimeOut(), TimeUnit.SECONDS);
 		driver.manage().timeouts()
 				.implicitlyWait(reader.getImplicitWait(), TimeUnit.SECONDS);
 		driver.get(reader.getWebsite());
 		driver.manage().window().maximize();
-		System.err.println("Driver HashCode : " + driver.hashCode());
 
 	}
 
 	@AfterTest(alwaysRun = true)
 	public void tearDownDriver() throws Exception {
+		oLog.info("Shutting Down the driver");
 		if (driver != null)
 			driver.quit();
 	}

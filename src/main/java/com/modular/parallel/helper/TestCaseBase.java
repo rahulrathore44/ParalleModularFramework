@@ -15,6 +15,7 @@ import com.modular.parallel.helper.DropDown.DropDownHelper;
 import com.modular.parallel.helper.HyperLink.LinkHelper;
 import com.modular.parallel.helper.Javascript.JavaScriptHelper;
 import com.modular.parallel.helper.Navigation.NavigationHelper;
+import com.modular.parallel.helper.TextBox.TextBoxHelper;
 import com.modular.parallel.helper.Wait.WaitHelper;
 import com.modular.parallel.interfaces.IconfigReader;
 
@@ -34,6 +35,7 @@ public class TestCaseBase extends InitializeWebDrive {
 	protected DropDownHelper dropDown;
 	protected LinkHelper link;
 	protected NavigationHelper navigate;
+	protected TextBoxHelper txtBox;
 
 	void initializeComponent() throws Exception {
 		try {
@@ -55,6 +57,8 @@ public class TestCaseBase extends InitializeWebDrive {
 			link = LinkHelper.class.getConstructor(WebDriver.class)
 					.newInstance(getDriver());
 			navigate = NavigationHelper.class.getConstructor(WebDriver.class)
+					.newInstance(getDriver());
+			txtBox = TextBoxHelper.class.getConstructor(WebDriver.class)
 					.newInstance(getDriver());
 		} catch (Exception e) {
 			throw e;

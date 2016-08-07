@@ -5,11 +5,13 @@
  */
 package com.modular.parallel.helper.HyperLink;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import com.modular.parallel.helper.Generic.GenericHelper;
+import com.modular.parallel.helper.Logger.LoggerHelper;
 
 /**
  * @author rahul.rathore
@@ -20,26 +22,32 @@ import com.modular.parallel.helper.Generic.GenericHelper;
 public class LinkHelper extends GenericHelper {
 
 	private WebDriver driver;
+	private Logger oLog = LoggerHelper.getLogger(LinkHelper.class);
 
 	public LinkHelper(WebDriver driver) {
 		super(driver);
 		this.driver = driver;
-		System.err.println("LinkHelper : " + this.driver.hashCode());
+		oLog.debug("LinkHelper : " + this.driver.hashCode());
 	}
 	
 	public void clickLink(String linkText) {
+		oLog.info(linkText);
 		getElement(By.linkText(linkText)).click();
 	}
 	
 	public void clickPartialLink(String partialLinkText) {
+		oLog.info(partialLinkText);
 		getElement(By.partialLinkText(partialLinkText)).click();
 	}
 	
 	public String getHyperLink(By locator){
+		oLog.info(locator);
 		return getHyperLink(getElement(locator));
 	}
 	
 	public String getHyperLink(WebElement element) {
-		return element.getAttribute("hreg");
+		String link = element.getAttribute("hreg");
+		oLog.info("Element : " + element + " Value : " + link);
+		return link;
 	}
 }

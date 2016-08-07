@@ -16,9 +16,7 @@ import java.io.InputStream;
  *
  */
 public class ResourceHelper {
-	
 
-	
 	public static String getResourcePath(String resource) {
 		String path = getBaseResourcePath() + resource;
 		return path;

@@ -7,6 +7,7 @@ package com.modular.parallel.helper.Wait;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
@@ -19,6 +20,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.google.common.base.Function;
 import com.modular.parallel.helper.Generic.GenericHelper;
 import com.modular.parallel.helper.Javascript.JavaScriptHelper;
+import com.modular.parallel.helper.Logger.LoggerHelper;
 import com.modular.parallel.interfaces.IconfigReader;
 
 /**
@@ -31,15 +33,17 @@ public class WaitHelper extends GenericHelper {
 	
 	private WebDriver driver;
 	private IconfigReader reader;
+	private Logger oLog = LoggerHelper.getLogger(WaitHelper.class);
 
 	public WaitHelper(WebDriver driver,IconfigReader reader) {
 		super(driver);
 		this.driver = driver;
 		this.reader = reader;
-		System.err.println("WaitHelper : " + this.driver.hashCode());
+		oLog.debug("WaitHelper : " + this.driver.hashCode());
 	}
 	
 	private WebDriverWait getWait(int timeOutInSeconds,int pollingEveryInMiliSec) {
+		oLog.debug("");
 		WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
 		wait.pollingEvery(pollingEveryInMiliSec, TimeUnit.MILLISECONDS);
 		wait.ignoring(NoSuchElementException.class);
@@ -50,6 +54,7 @@ public class WaitHelper extends GenericHelper {
 	
 	
 	public void setImplicitWait(long timeout,TimeUnit unit) {
+		oLog.info(timeout);
 		driver
 		.manage()
 		.timeouts()
@@ -57,6 +62,7 @@ public class WaitHelper extends GenericHelper {
 	}
 	
 	public void waitForElementVisible(By locator,int timeOutInSeconds,int pollingEveryInMiliSec) {
+		oLog.info(locator);
 		setImplicitWait(1, TimeUnit.SECONDS);
 		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMiliSec);
 		wait.until(ExpectedConditions.visibilityOf(driver.findElement(locator)));
@@ -64,11 +70,12 @@ public class WaitHelper extends GenericHelper {
 	}
 
 	public void hardWait(int timeOutInMiliSec) throws InterruptedException {
+		oLog.info(timeOutInMiliSec);
 		Thread.sleep(timeOutInMiliSec);
 	}
 	
 	public WebElement handleStaleElement(By locator,int retryCount,int delayInSeconds) throws InterruptedException {
-		
+		oLog.info(locator);
 		WebElement element = null;
 		
 		while (retryCount >= 0) {
@@ -84,6 +91,7 @@ public class WaitHelper extends GenericHelper {
 	}
 	
 	public void elementExits(By locator,int timeOutInSeconds,int pollingEveryInMiliSec) {
+		oLog.info(locator);
 		setImplicitWait(1, TimeUnit.SECONDS);
 		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMiliSec);
 		wait.until(elementLocatedBy(locator));
@@ -91,6 +99,7 @@ public class WaitHelper extends GenericHelper {
 	}
 	
 	public void elementExistAndVisible(By locator,int timeOutInSeconds,int pollingEveryInMiliSec) {
+		oLog.info(locator);
 		setImplicitWait(1, TimeUnit.SECONDS);
 		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMiliSec);
 		wait.until(elementLocatedBy(locator));
@@ -105,6 +114,7 @@ public class WaitHelper extends GenericHelper {
 
 			@Override
 			public Boolean apply(WebDriver driver) {
+				oLog.debug("");
 				return driver.findElements(locator).size() >= 1;
 			}
 		};
