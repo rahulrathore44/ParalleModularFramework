@@ -94,7 +94,7 @@ public abstract class InitializeWebDrive {
 			throw new NoSutiableDriverFoundException(" Driver Not Found : "
 					+ reader.getBrowser());
 		}
-		oLog.debug("InitializeWebDrive : " + this.driver.hashCode());
+		oLog.info("InitializeWebDrive : " + this.driver.hashCode());
 		driver.manage().timeouts()
 				.pageLoadTimeout(reader.getPageLoadTimeOut(), TimeUnit.SECONDS);
 		driver.manage().timeouts()

@@ -5,8 +5,6 @@
  */
 package com.modular.parallel.helper;
 
-import org.openqa.selenium.WebDriver;
-
 import com.modular.parallel.helper.Alert.AlertHelper;
 import com.modular.parallel.helper.Browser.BrowserHelper;
 import com.modular.parallel.helper.Button.ButtonHelper;
@@ -17,7 +15,7 @@ import com.modular.parallel.helper.Javascript.JavaScriptHelper;
 import com.modular.parallel.helper.Navigation.NavigationHelper;
 import com.modular.parallel.helper.TextBox.TextBoxHelper;
 import com.modular.parallel.helper.Wait.WaitHelper;
-import com.modular.parallel.interfaces.IconfigReader;
+import com.modular.parallel.settings.ObjectRepo;
 
 /**
  * @author rsr
@@ -39,27 +37,16 @@ public class TestCaseBase extends InitializeWebDrive {
 
 	void initializeComponent() throws Exception {
 		try {
-			button = ButtonHelper.class.getConstructor(WebDriver.class)
-					.newInstance(getDriver());
-			alert = AlertHelper.class.getConstructor(WebDriver.class)
-					.newInstance(getDriver());
-			javaScript = JavaScriptHelper.class.getConstructor(WebDriver.class)
-					.newInstance(getDriver());
-			browser = BrowserHelper.class.getConstructor(WebDriver.class)
-					.newInstance(getDriver());
-			chkBox = CheckBoxOrRadioButtonHelper.class.getConstructor(
-					WebDriver.class).newInstance(getDriver());
-			wait = WaitHelper.class.getConstructor(WebDriver.class,
-					IconfigReader.class).newInstance(getDriver(),
-					getConfigReader());
-			dropDown = DropDownHelper.class.getConstructor(WebDriver.class)
-					.newInstance(getDriver());
-			link = LinkHelper.class.getConstructor(WebDriver.class)
-					.newInstance(getDriver());
-			navigate = NavigationHelper.class.getConstructor(WebDriver.class)
-					.newInstance(getDriver());
-			txtBox = TextBoxHelper.class.getConstructor(WebDriver.class)
-					.newInstance(getDriver());
+			button = new ButtonHelper(getDriver());
+			alert = new AlertHelper(getDriver());
+			javaScript = new JavaScriptHelper(getDriver());
+			browser = new BrowserHelper(getDriver());
+			chkBox = new CheckBoxOrRadioButtonHelper(getDriver());
+			wait = new WaitHelper(getDriver(), getConfigReader());
+			dropDown = new DropDownHelper(getDriver());
+			link = new LinkHelper(getDriver());
+			navigate = new NavigationHelper(getDriver());
+			txtBox = new TextBoxHelper(getDriver());
 		} catch (Exception e) {
 			throw e;
 		}
@@ -71,6 +58,6 @@ public class TestCaseBase extends InitializeWebDrive {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		ObjectRepo.data.add(getDriver());		
 	}
 }
