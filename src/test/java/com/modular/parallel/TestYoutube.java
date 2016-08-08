@@ -1,6 +1,7 @@
 package com.modular.parallel;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.modular.parallel.helper.TestCaseBase;
@@ -20,10 +21,13 @@ public class TestYoutube extends TestCaseBase {
 	
 	@Test
 	public void testAlert() {
-		getDriver().get("http://www.google.com");
-		javaScript.executeScript("alert('Please enter your name');");
-		System.out.println(alert.getAlertText());
+		getDriver().get("http://www.w3schools.com/js/tryit.asp?filename=tryjs_alert");
+		wait.waitForIframe(By.id("iframeResult"), getConfigReader().getExplicitWait(), 300);
+		browser.switchToFrame(By.id("iframeResult"));
+		button.click(By.xpath("html/body/button"));
+		Assert.assertEquals(alert.getAlertText(),"I am an alert box!");
 		alert.AcceptAlertIfPresent();
+		getDriver().switchTo().defaultContent();
 	}
    
 }

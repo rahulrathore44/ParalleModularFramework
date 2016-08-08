@@ -9,10 +9,11 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import com.modular.parallel.helper.Generic.GenericHelper;
 import com.modular.parallel.helper.Logger.LoggerHelper;
-import com.modular.parallel.interfaces.IwebComponent;
 
 /**
  * @author rahul.rathore
@@ -20,12 +21,13 @@ import com.modular.parallel.interfaces.IwebComponent;
  *         06-Aug-2016
  *
  */
-public class BrowserHelper implements IwebComponent {
+public class BrowserHelper extends GenericHelper {
 
 	private WebDriver driver;
 	private Logger oLog = LoggerHelper.getLogger(BrowserHelper.class);
 
 	public BrowserHelper(WebDriver driver) {
+		super(driver);
 		this.driver = driver;
 		oLog.debug("BrowserHelper : " + this.driver.hashCode());
 	}
@@ -82,6 +84,16 @@ public class BrowserHelper implements IwebComponent {
 		}
 
 		switchToParentWindow();
+	}
+	
+	public void switchToFrame(By locator) {
+		driver.switchTo().frame(getElement(locator));
+		oLog.info(locator);
+	}
+	
+	public void switchToFrame(String nameOrId) {
+		driver.switchTo().frame(nameOrId);
+		oLog.info(nameOrId);
 	}
 
 }

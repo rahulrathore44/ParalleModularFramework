@@ -107,8 +107,14 @@ public abstract class InitializeWebDrive {
 	@AfterTest(alwaysRun = true)
 	public void tearDownDriver() throws Exception {
 		oLog.info("Shutting Down the driver");
-		if (driver != null)
-			driver.quit();
+		try {
+			if (driver != null)
+				driver.quit();
+		} catch (Exception e) {
+			oLog.error(e);
+			throw e;
+		}
+		
 	}
 
 }

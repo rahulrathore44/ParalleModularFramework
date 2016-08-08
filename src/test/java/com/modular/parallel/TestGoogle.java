@@ -6,6 +6,7 @@
 package com.modular.parallel;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.modular.parallel.helper.TestCaseBase;
@@ -21,16 +22,21 @@ public class TestGoogle extends TestCaseBase {
 	public void name() throws Exception {
 		getDriver().navigate().to("https://www.google.com/");
 		getDriver().findElement(By.xpath("//input[@value='Google Search']")).click();
-		Thread.sleep(6000);
+		Thread.sleep(3000);
 	}
 	
 	@Test
 	public void testConfirm() {
-		getDriver().get("http://www.google.com");
-		javaScript.executeScript("confirm('Press a button');");
+		getDriver().get("http://www.w3schools.com/js/tryit.asp?filename=tryjs_confirm");
+		wait.waitForIframe(By.id("iframeResult"), getConfigReader().getExplicitWait(), 300);
+		browser.switchToFrame(By.id("iframeResult"));
+		button.click(By.xpath("html/body/button"));
 		alert.AcceptAlertIfPresent();
-		javaScript.executeScript("confirm('Press a button');");
+		Assert.assertEquals(txtBox.getText(By.id("demo")),"You pressed OK!");
+		button.click(By.xpath("html/body/button"));
 		alert.DismissAlertIfPresent();
+		Assert.assertEquals(txtBox.getText(By.id("demo")),"You pressed Cancel!");
+		getDriver().switchTo().defaultContent();
 	}
 	
 

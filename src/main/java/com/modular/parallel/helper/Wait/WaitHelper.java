@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -49,6 +50,7 @@ public class WaitHelper extends GenericHelper {
 		wait.ignoring(NoSuchElementException.class);
 		wait.ignoring(ElementNotVisibleException.class);
 		wait.ignoring(StaleElementReferenceException.class);
+		wait.ignoring(NoSuchFrameException.class);
 		return wait;
 	}
 	
@@ -109,12 +111,21 @@ public class WaitHelper extends GenericHelper {
 		
 	}
 	
+	public void waitForIframe(By locator,int timeOutInSeconds,int pollingEveryInMiliSec) {
+		oLog.info(locator);
+		setImplicitWait(1, TimeUnit.SECONDS);
+		WebDriverWait wait = getWait(timeOutInSeconds, pollingEveryInMiliSec);
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(locator));
+		driver.switchTo().defaultContent();
+		setImplicitWait(reader.getImplicitWait(), TimeUnit.SECONDS);
+	}
+	
 	private Function<WebDriver, Boolean> elementLocatedBy(final By locator){
 		return new Function<WebDriver, Boolean>() {
 
 			@Override
 			public Boolean apply(WebDriver driver) {
-				oLog.debug("");
+				oLog.debug(locator);
 				return driver.findElements(locator).size() >= 1;
 			}
 		};

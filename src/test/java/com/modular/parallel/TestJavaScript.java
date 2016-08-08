@@ -8,6 +8,7 @@ package com.modular.parallel;
 import java.io.IOException;
 
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.modular.parallel.helper.TestCaseBase;
@@ -22,21 +23,27 @@ public class TestJavaScript extends TestCaseBase {
 	
 	@Test
 	public void testGetAlertText() {
-		getDriver().get("http://www.google.com");
-		javaScript.executeScript("prompt('Please enter your name');");
-		System.out.println(alert.getAlertText());
+		getDriver().get("http://www.w3schools.com/js/tryit.asp?filename=tryjs_prompt");
+		wait.waitForIframe(By.id("iframeResult"), getConfigReader().getExplicitWait(), 300);
+		browser.switchToFrame(By.id("iframeResult"));
+		button.click(By.xpath("html/body/button"));
+		Assert.assertEquals(alert.getAlertText(),"Please enter your name");
 		alert.AcceptPrompt("Harry Potter");
-		javaScript.executeScript("prompt('Please enter your name');");
+		button.click(By.xpath("html/body/button"));
 		alert.DismissAlertIfPresent();
+		getDriver().switchTo().defaultContent();
 	}
 	
 	@Test
 	public void testPromt() {
-		getDriver().get("http://www.google.com");
-		javaScript.executeScript("prompt('Please enter your name');");
+		getDriver().get("http://www.w3schools.com/js/tryit.asp?filename=tryjs_prompt");
+		wait.waitForIframe(By.id("iframeResult"), getConfigReader().getExplicitWait(), 300);
+		browser.switchToFrame(By.id("iframeResult"));
+		button.click(By.xpath("html/body/button"));
 		alert.AcceptPrompt("Harry Potter");
-		javaScript.executeScript("prompt('Please enter your name');");
+		button.click(By.xpath("html/body/button"));
 		alert.DismissAlertIfPresent();
+		getDriver().switchTo().defaultContent();
 	}
 	
 	

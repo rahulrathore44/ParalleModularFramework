@@ -31,7 +31,7 @@ public class AlertHelper implements IwebComponent{
 	}
 	
 	public Alert getAlert() {
-		oLog.info("");
+		oLog.debug("");
 		return driver.switchTo().alert();
 	}
 	

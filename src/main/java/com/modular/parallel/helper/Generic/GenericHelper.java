@@ -54,8 +54,9 @@ public class GenericHelper implements IwebComponent {
 	}
 
 	public boolean IsElementPresentQuick(By locator) {
-		oLog.info(locator);
-		return driver.findElements(locator).size() >= 1;
+		boolean flag = driver.findElements(locator).size() >= 1;
+		oLog.info(flag);
+		return flag;
 	}
 
 	public String takeScreenShot(String name) throws IOException {
