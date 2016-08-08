@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="tests" thread-count="5">
+	<listeners>
+		<listener
+			class-name="com.modular.parallel.listeners.reportlistener.ExcelReportListener"></listener>
+	</listeners>
 	<test name="Test - 1">
 		<classes>
 			<class name="com.modular.parallel.TestGoogle" />
