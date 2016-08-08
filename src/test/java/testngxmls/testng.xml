@@ -1,29 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="tests" thread-count="5" >
+<suite name="Suite" parallel="tests" thread-count="5">
 	<listeners>
 		<listener class-name="com.modular.parallel.listeners.reportlistener.ExcelReportListener" />
 			<listener class-name="com.modular.parallel.listeners.reportlistener.ExtentReportListener"/>
 	</listeners>
-	<test name="Test - 1">
-		<classes>
-			<class name="com.modular.parallel.TestGoogle" />
-		</classes>
-	</test> 
 	<test name="Test - 2">
 		<classes>
 			<class name="com.modular.parallel.TestYoutube" />
 			<class name="com.modular.parallel.TestDropDown" />
+			<class name="com.modular.parallel.TestGoogle" />
 		</classes>
 	</test> 
 	<test name="Test - 3">
 		<classes>
 			<class name="com.modular.parallel.TestFaceBook" />
 			<class name="com.modular.parallel.TestJavaScript" />
-		</classes>
-	</test>
-	<test name="Test - 4">
-		<classes>
 			<class name="com.modular.parallel.TestAlert" />
 		</classes>
 	</test>

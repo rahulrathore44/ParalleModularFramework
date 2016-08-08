@@ -28,5 +28,17 @@ public class TestAlert extends TestCaseBase {
 		alert.AcceptAlertIfPresent();
 		getDriver().switchTo().defaultContent();
 	}
+	
+	@Test
+	public void testBlert() {
+		getDriver().get("http://www.w3schools.com/js/tryit.asp?filename=tryjs_alert");
+		wait.waitForIframe(By.id("iframeResult"), getConfigReader().getExplicitWait(), 300);
+		browser.switchToFrame(By.id("iframeResult"));
+		button.click(By.xpath("html/body/button"));
+		Assert.assertEquals(alert.getAlertText(),"I am an alert box!");
+		alert.AcceptAlertIfPresent();
+		getDriver().switchTo().defaultContent();
+	}
+
 
 }
