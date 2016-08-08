@@ -5,19 +5,14 @@
  */
 package com.modular.parallel.listeners.reportlistener;
 
-import java.io.IOException;
-
 import org.apache.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import com.modular.parallel.helper.Generic.GenericHelper;
 import com.modular.parallel.helper.Logger.LoggerHelper;
-import com.modular.parallel.settings.ObjectRepo;
 import com.modular.parallel.utility.DateTimeHelper;
 import com.modular.parallel.utility.ResourceHelper;
 import com.relevantcodes.extentreports.ExtentReports;
