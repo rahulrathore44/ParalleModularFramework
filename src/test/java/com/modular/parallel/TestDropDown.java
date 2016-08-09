@@ -36,10 +36,11 @@ public class TestDropDown extends TestCaseBase {
 	}
 	
 	@Test
-	public void linkHelperTest() {
+	public void linkHelperTest() throws Exception {
 		getDriver().get("https://www.pluralsight.com/");
 		wait.elementExistAndVisible(By.partialLinkText("Business"), getConfigReader().getExplicitWait(), 250);
 		link.clickPartialLink("Business");
+		Thread.sleep(3000);
 		Assert.assertEquals(getDriver().getTitle(), "Group Plans | Pluralsight");
 	}
 }

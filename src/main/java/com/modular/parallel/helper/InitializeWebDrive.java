@@ -31,6 +31,7 @@ import com.modular.parallel.helper.Navigation.NavigationHelper;
 import com.modular.parallel.helper.TextBox.TextBoxHelper;
 import com.modular.parallel.helper.Wait.WaitHelper;
 import com.modular.parallel.interfaces.IconfigReader;
+import com.modular.parallel.settings.ObjectRepo;
 
 /**
  * @author rsr
@@ -134,6 +135,7 @@ public abstract class InitializeWebDrive {
 		driver.get(reader.getWebsite());
 		driver.manage().window().maximize();
 		initializeComponent(driver, reader);
+		ObjectRepo.data.put(Thread.currentThread().getName()+Thread.currentThread().getId(), this.driver);
 
 	}
 

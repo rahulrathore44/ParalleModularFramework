@@ -22,7 +22,6 @@ public class TestGoogle extends TestCaseBase {
 	public void testGoogle() throws Exception {
 		getDriver().navigate().to("https://www.google.com/");
 		txtBox.sendKeys(By.xpath("//input[@name='q']"), "Selenium");
-		button.click(By.xpath("//button[@value='Search']"));
 		Thread.sleep(3000);
 	}
 	

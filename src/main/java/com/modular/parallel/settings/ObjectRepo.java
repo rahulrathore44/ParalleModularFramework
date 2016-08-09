@@ -5,7 +5,10 @@
  */
 package com.modular.parallel.settings;
 
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import org.openqa.selenium.WebDriver;
 
 /**
  * @author rsr
@@ -14,6 +17,6 @@ import java.util.List;
  */
 public class ObjectRepo {
 	
-	public static List<Object> data = new java.util.LinkedList<Object>();
+	public static Map<String, WebDriver> data = new LinkedHashMap<String, WebDriver>();
 	
 }
