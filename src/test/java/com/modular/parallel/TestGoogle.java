@@ -19,9 +19,10 @@ import com.modular.parallel.helper.TestCaseBase;
 public class TestGoogle extends TestCaseBase {
 	
 	@Test
-	public void name() throws Exception {
+	public void testGoogle() throws Exception {
 		getDriver().navigate().to("https://www.google.com/");
-		getDriver().findElement(By.xpath("//input[@value='Google Search']")).click();
+		txtBox.sendKeys(By.xpath("//input[@name='q']"), "Selenium");
+		button.click(By.xpath("//button[@value='Search']"));
 		Thread.sleep(3000);
 	}
 	

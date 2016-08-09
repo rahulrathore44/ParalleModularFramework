@@ -20,7 +20,7 @@ import com.modular.parallel.helper.TestCaseBase;
 public class TestFaceBook extends TestCaseBase{
 	
 	@Test
-	public void name() throws Exception {
+	public void testFacebook() throws Exception {
 		getDriver().navigate().to("https://www.facebook.com/");
 		getDriver().findElement(By.xpath("//button[@name='websubmit']")).click();
 		Thread.sleep(6000);

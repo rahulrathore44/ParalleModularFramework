@@ -8,7 +8,7 @@ import com.modular.parallel.helper.TestCaseBase;
 public class TestYoutube extends TestCaseBase {
 	
 	@Test
-	public void name() throws Exception {
+	public void testYoutube() throws Exception {
 		getDriver().navigate().to("https://www.youtube.com/");
 		getDriver().findElement(By.xpath("//button//span[text()='Sign in']")).click();
 		Thread.sleep(5000);
