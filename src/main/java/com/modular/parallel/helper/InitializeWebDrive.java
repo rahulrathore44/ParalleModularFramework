@@ -94,7 +94,7 @@ public abstract class InitializeWebDrive {
 		return reader;
 	}
 
-	public WebDriver gridSetUp(String browser, String hubUrl)
+	public WebDriver gridSetUp(String hubUrl, String browser)
 			throws MalformedURLException {
 		
 		oLog.info(hubUrl + " : " + browser);
