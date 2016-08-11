@@ -5,11 +5,15 @@
  */
 package com.modular.parallel.configuration.browser;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 /**
  * @author rsr
@@ -29,7 +33,10 @@ public class FirefoxBrowser {
 	
 	public WebDriver getFirefoxDriver(Capabilities cap) {
 		return new FirefoxDriver(cap);
-		
+	}
+	
+	public WebDriver getFirefoxDriver(String hubUrl,Capabilities cap) throws MalformedURLException {
+		return new RemoteWebDriver(new URL(hubUrl),cap);
 	}
 
 }

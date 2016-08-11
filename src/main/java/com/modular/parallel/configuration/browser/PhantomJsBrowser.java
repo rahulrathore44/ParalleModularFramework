@@ -6,12 +6,15 @@
 package com.modular.parallel.configuration.browser;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.modular.parallel.utility.DateTimeHelper;
 import com.modular.parallel.utility.ResourceHelper;
@@ -48,4 +51,11 @@ public class PhantomJsBrowser {
 
 		return new PhantomJSDriver(sev, cap);
 	}
+	
+	public WebDriver getPhantomJsDriver(String hubUrl,PhantomJSDriverService sev,
+			Capabilities cap) throws MalformedURLException {
+
+		return new RemoteWebDriver(new URL(hubUrl), cap);
+	}
+	
 }

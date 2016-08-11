@@ -5,14 +5,18 @@
  */
 package com.modular.parallel.helper;
 
+import java.net.MalformedURLException;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 
 import com.modular.parallel.configreader.PropertyFileReader;
+import com.modular.parallel.configuration.browser.BrowserType;
 import com.modular.parallel.configuration.browser.ChromeBrowser;
 import com.modular.parallel.configuration.browser.FirefoxBrowser;
 import com.modular.parallel.configuration.browser.HtmlUnitBrowser;
@@ -44,7 +48,7 @@ public abstract class InitializeWebDrive {
 	private volatile WebDriver driver;
 	private volatile IconfigReader reader;
 	private Logger oLog = LoggerHelper.getLogger(InitializeWebDrive.class);
-	
+
 	protected ButtonHelper button;
 	protected AlertHelper alert;
 	protected JavaScriptHelper javaScript;
@@ -90,43 +94,89 @@ public abstract class InitializeWebDrive {
 		return reader;
 	}
 
-	@BeforeClass(alwaysRun = true)
-	public void setUpDriver() throws Exception {
-		oLog.info(reader.getBrowser());
-		switch (reader.getBrowser()) {
+	public WebDriver gridSetUp(String browser, String hubUrl)
+			throws MalformedURLException {
+		
+		oLog.info(hubUrl + " : " + browser);
+		
+		switch (BrowserType.valueOf(browser)) {
+		
 		case Chrome:
-			ChromeBrowser chrome = ChromeBrowser.class.newInstance();
-			driver = chrome.getChromeDriver(chrome.getChromeCapabilities());
-			break;
+			ChromeBrowser chrome = new ChromeBrowser();
+			return chrome.getChromeDriver(hubUrl,
+					chrome.getChromeCapabilities());
 
 		case Firefox:
-			FirefoxBrowser firefox = FirefoxBrowser.class.newInstance();
-			driver = firefox.getFirefoxDriver(firefox.getFirefoxCapabilities());
-			break;
+			FirefoxBrowser firefox = new FirefoxBrowser();
+			return firefox.getFirefoxDriver(hubUrl,
+					firefox.getFirefoxCapabilities());
 
 		case HtmlUnitDriver:
-			HtmlUnitBrowser htmlUnit = HtmlUnitBrowser.class.newInstance();
-			driver = htmlUnit.getHtmlUnitDriver(htmlUnit
-					.getHtmlUnitDriverCapabilities());
-			break;
 
 		case Iexplorer:
-			IExploreBrowser iExplore = IExploreBrowser.class.newInstance();
-			driver = iExplore.getIExplorerDriver(iExplore
-					.getIExplorerCapabilities());
-			break;
+			IExploreBrowser iExplore = new IExploreBrowser();
+			return iExplore.getIExplorerDriver(hubUrl,
+					iExplore.getIExplorerCapabilities());
 
 		case PhantomJs:
-			PhantomJsBrowser jsBrowser = PhantomJsBrowser.class.newInstance();
-			driver = jsBrowser.getPhantomJsDriver(
+			PhantomJsBrowser jsBrowser = new PhantomJsBrowser();
+			return jsBrowser.getPhantomJsDriver(hubUrl,
 					jsBrowser.getPhantomJsService(),
 					jsBrowser.getPhantomJsCapability());
-			break;
 
 		default:
 			throw new NoSutiableDriverFoundException(" Driver Not Found : "
 					+ reader.getBrowser());
 		}
+	}
+
+	public WebDriver standAloneStepUp() throws Exception {
+		
+		oLog.info(reader.getBrowser());
+		
+		switch (reader.getBrowser()) {
+		
+		case Chrome:
+			ChromeBrowser chrome = ChromeBrowser.class.newInstance();
+			return chrome.getChromeDriver(chrome.getChromeCapabilities());
+
+		case Firefox:
+			FirefoxBrowser firefox = FirefoxBrowser.class.newInstance();
+			return firefox.getFirefoxDriver(firefox.getFirefoxCapabilities());
+
+		case HtmlUnitDriver:
+			HtmlUnitBrowser htmlUnit = HtmlUnitBrowser.class.newInstance();
+			return htmlUnit.getHtmlUnitDriver(htmlUnit
+					.getHtmlUnitDriverCapabilities());
+
+		case Iexplorer:
+			IExploreBrowser iExplore = IExploreBrowser.class.newInstance();
+			return iExplore.getIExplorerDriver(iExplore
+					.getIExplorerCapabilities());
+
+		case PhantomJs:
+			PhantomJsBrowser jsBrowser = PhantomJsBrowser.class.newInstance();
+			return jsBrowser.getPhantomJsDriver(
+					jsBrowser.getPhantomJsService(),
+					jsBrowser.getPhantomJsCapability());
+
+		default:
+			throw new NoSutiableDriverFoundException(" Driver Not Found : "
+					+ reader.getBrowser());
+		}
+
+	}
+	
+	@Parameters(value={"hubUrl","browser"})
+	@BeforeClass(alwaysRun = true)
+	public void setUpDriver(@Optional String hubUrl,@Optional String browser) throws Exception {
+		if(null == hubUrl)
+			this.driver = standAloneStepUp();
+		else 
+			this.driver = gridSetUp(hubUrl == null ? "http://localhost:4444/wd/hub" : hubUrl, 
+					browser == null ? "Chrome" : browser);
+			
+
 		oLog.debug("InitializeWebDrive : " + this.driver.hashCode());
 		driver.manage().timeouts()
 				.pageLoadTimeout(reader.getPageLoadTimeOut(), TimeUnit.SECONDS);
@@ -135,7 +185,8 @@ public abstract class InitializeWebDrive {
 		driver.get(reader.getWebsite());
 		driver.manage().window().maximize();
 		initializeComponent(driver, reader);
-		ObjectRepo.data.put(Thread.currentThread().getName()+Thread.currentThread().getId(), this.driver);
+		ObjectRepo.data.put(Thread.currentThread().getName()
+				+ Thread.currentThread().getId(), this.driver);
 
 	}
 
