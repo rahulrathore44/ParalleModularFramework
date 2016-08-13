@@ -8,25 +8,29 @@
 			class-name="com.modular.parallel.listeners.reportlistener.ExtentReportListener" />
 	</listeners>
 	<test name="JavaScript">
-		<parameter name="hubUrl" value="http://10.60.225.202:4444/wd/hub" />
+		<parameter name="hubUrl" value="http://192.168.0.107:4444/wd/hub" />
 		<parameter name="browser" value="Chrome"></parameter>
 		<classes>
-			<class name="com.modular.parallel.TestJavaScript" />
-			<class name="com.modular.parallel.TestAlert" />
-		</classes>
-	</test>
-	<test name="Test - 2">
-		<classes>
+			<class name="com.modular.parallel.TestDataProviderTwo" />
 			<class name="com.modular.parallel.TestYoutube" />
 			<class name="com.modular.parallel.TestFaceBook" />
 		</classes>
 	</test>
-	<test name="Test - 3">
-		<parameter name="hubUrl" value="http://10.60.225.202:4444/wd/hub" />
-		<parameter name="browser" value="Firefox"></parameter>
+	<test name="Test - 2">
 		<classes>
+			<class name="com.modular.parallel.TestDataProviderClass" />
 			<class name="com.modular.parallel.TestDropDown" />
 			<class name="com.modular.parallel.TestGoogle" />
+		</classes>
+	</test>
+	<test name="Test - 3">
+		<parameter name="hubUrl" value="http://192.168.0.107:4444/wd/hub" />
+		<parameter name="browser" value="Firefox"></parameter>
+		<classes>
+			<class name="com.modular.parallel.TestDataProviderTwo" />
+			<class name="com.modular.parallel.TestDataProviderClass" />
+			<class name="com.modular.parallel.TestJavaScript" />
+			<class name="com.modular.parallel.TestAlert" />
 		</classes>
 	</test>
 
