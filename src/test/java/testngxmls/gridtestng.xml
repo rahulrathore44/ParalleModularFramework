@@ -7,8 +7,8 @@
 		<listener
 			class-name="com.modular.parallel.listeners.reportlistener.ExtentReportListener" />
 	</listeners>
-	<test name="Test - 1">
-		<parameter name="hubUrl" value="http://192.168.0.163:4444/wd/hub" />
+	<test name="JavaScript">
+		<parameter name="hubUrl" value="http://10.60.225.202:4444/wd/hub" />
 		<parameter name="browser" value="Chrome"></parameter>
 		<classes>
 			<class name="com.modular.parallel.TestJavaScript" />
@@ -22,10 +22,12 @@
 		</classes>
 	</test>
 	<test name="Test - 3">
+		<parameter name="hubUrl" value="http://10.60.225.202:4444/wd/hub" />
+		<parameter name="browser" value="Firefox"></parameter>
 		<classes>
 			<class name="com.modular.parallel.TestDropDown" />
 			<class name="com.modular.parallel.TestGoogle" />
 		</classes>
 	</test>
-	
+
 </suite> 
