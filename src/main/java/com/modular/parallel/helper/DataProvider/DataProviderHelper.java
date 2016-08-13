@@ -24,20 +24,22 @@ import com.modular.parallel.utility.ResourceHelper;
  */
 public class DataProviderHelper {
 
-	public static final Logger log = LoggerHelper
+	private static final Logger log = LoggerHelper
 			.getLogger(DataProviderHelper.class);
 
-	@DataProvider(name = "getLoginData")
+	@DataProvider(name = "getLoginData", parallel=true)
 	public static Object[][] getLoginData() throws Exception {
-		log.info("Data Provider");
+		log.info("Data Provider : " + Thread.currentThread().getName()
+				+ Thread.currentThread().getId());
 		IdataReader helper = new ExcelReaderHelper(
 				ResourceHelper.getResourcePath("exceldata/Login.xlsx"));
 		return helper.getData("LoginDetails");
 	}
 
-	@DataProvider(name = "getLoginDatafromAno")
+	@DataProvider(name = "getLoginDatafromAno",parallel=true)
 	public static Object[][] getLoginDatafromAno(Method mth) throws Exception {
-		log.info("Data Provider");
+		log.info("Data Provider : " + Thread.currentThread().getName()
+				+ Thread.currentThread().getId());
 		ExcelFileLocation location = mth.getAnnotation(ExcelFileLocation.class);
 		IdataReader helper = new ExcelReaderHelper(
 				ResourceHelper.getResourcePath("exceldata/"

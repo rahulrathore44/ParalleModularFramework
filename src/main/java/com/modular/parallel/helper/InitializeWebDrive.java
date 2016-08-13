@@ -170,7 +170,7 @@ public abstract class InitializeWebDrive {
 	@Parameters(value={"hubUrl","browser"})
 	@BeforeClass(alwaysRun = true)
 	public void setUpDriver(@Optional String hubUrl,@Optional String browser) throws Exception {
-		if(null == hubUrl)
+		if(null == hubUrl || null == browser)
 			this.driver = standAloneStepUp();
 		else 
 			this.driver = gridSetUp(hubUrl == null ? "http://localhost:4444/wd/hub" : hubUrl, 

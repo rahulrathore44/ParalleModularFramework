@@ -9,18 +9,22 @@
 	</listeners>
 	<test name="Test - 1">
 		<classes>
+			<class name="com.modular.parallel.TestDataProviderTwo" />
 			<class name="com.modular.parallel.TestYoutube" />
 			<class name="com.modular.parallel.TestFaceBook" />
 		</classes>
 	</test>
 	<test name="Test - 2">
 		<classes>
+			<class name="com.modular.parallel.TestDataProviderClass" />
 			<class name="com.modular.parallel.TestDropDown" />
 			<class name="com.modular.parallel.TestGoogle" />
 		</classes>
 	</test>
 	<test name="Test - 3">
 		<classes>
+			<class name="com.modular.parallel.TestDataProviderTwo" />
+			<class name="com.modular.parallel.TestDataProviderClass" />
 			<class name="com.modular.parallel.TestJavaScript" />
 			<class name="com.modular.parallel.TestAlert" />
 		</classes>

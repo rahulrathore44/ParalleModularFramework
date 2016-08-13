@@ -72,7 +72,8 @@ public class ExtentReportListener implements ISuiteListener, ITestListener {
 		}
 	}
 
-	public void onTestSkipped(ITestResult arg0) {
+	public void onTestSkipped(ITestResult test) {
+		exTest.log(LogStatus.SKIP, test.getTestClass().getName() + "." + test.getMethod().getMethodName());
 	}
 
 	public void onTestStart(ITestResult arg0) {

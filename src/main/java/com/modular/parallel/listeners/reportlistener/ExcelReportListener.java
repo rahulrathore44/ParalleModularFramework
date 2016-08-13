@@ -47,6 +47,7 @@ public class ExcelReportListener implements ISuiteListener, ITestListener {
 	private XSSFSheet sheet = null;
 	private IResultMap pass = null;
 	private IResultMap fail = null;
+	private IResultMap skip = null;
 	private Collection<ITestNGMethod> pass_method_name = null;
 	private Set<ITestResult> pass_method_status = null;
 	private Collection<ITestNGMethod> fail_method_name = null;
@@ -77,6 +78,7 @@ public class ExcelReportListener implements ISuiteListener, ITestListener {
 
 		pass = context.getPassedTests();
 		fail = context.getFailedTests();
+		skip = context.getSkippedTests();
 
 		pass_method_name = pass.getAllMethods();
 		pass_method_status = pass.getAllResults();

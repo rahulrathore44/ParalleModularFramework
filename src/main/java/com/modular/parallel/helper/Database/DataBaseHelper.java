@@ -39,7 +39,7 @@ public class DataBaseHelper implements IdataReader {
 		this.reader = reader;
 	}
 
-	protected final Logger log = LoggerHelper
+	private final Logger log = LoggerHelper
 			.getLogger(DataBaseHelper.class);
 
 	public Statement getConnection() throws SQLException,
@@ -100,7 +100,7 @@ public class DataBaseHelper implements IdataReader {
 	}
 
 	@Override
-	public Object[][] getData(String query, String... columnName)
+	public synchronized Object[][] getData(String query, String... columnName)
 			throws SQLException, ClassNotFoundException {
 		List<Map<String, Object>> tableData = getTableData(query, columnName);
 
@@ -116,7 +116,7 @@ public class DataBaseHelper implements IdataReader {
 	}
 
 	@Override
-	public Object[][] getData(String query) throws SQLException,
+	public synchronized Object[][] getData(String query) throws SQLException,
 			ClassNotFoundException {
 		List<Map<String, Object>> tableData = getTableData(query);
 		Object[][] data = new Object[tableData.size()][1];
@@ -131,7 +131,7 @@ public class DataBaseHelper implements IdataReader {
 	}
 
 	@Override
-	public List<Map<String, Object>> getTableData(String query)
+	public synchronized List<Map<String, Object>> getTableData(String query)
 			throws SQLException, ClassNotFoundException {
 		ResultSet set = executeQuery(query);
 		ResultSetMetaData metaData = set.getMetaData();
@@ -148,7 +148,7 @@ public class DataBaseHelper implements IdataReader {
 	}
 
 	@Override
-	public List<Map<String, Object>> getTableData(String query,
+	public synchronized List<Map<String, Object>> getTableData(String query,
 			String... columnName) throws SQLException, ClassNotFoundException {
 		List<Map<String, Object>> tableData = getTableData(query);
 		List<Map<String, Object>> filterData = new LinkedList<Map<String, Object>>();

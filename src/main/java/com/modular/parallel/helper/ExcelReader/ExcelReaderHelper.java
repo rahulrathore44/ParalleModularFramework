@@ -23,6 +23,7 @@ import com.modular.parallel.helper.Logger.LoggerHelper;
 import com.modular.parallel.interfaces.IdataReader;
 
 
+
 /**
  * @author rahul.rathore
  *
@@ -64,7 +65,7 @@ public class ExcelReaderHelper implements IdataReader {
 	}
 
 	@Override
-	public Object[][] getData(String sheet) throws Exception {
+	public synchronized Object[][] getData(String sheet) throws Exception {
 		List<Map<String, Object>> tableData = getTableData(sheet);
 		Object[][] data = new Object[tableData.size()][1];
 
@@ -78,7 +79,7 @@ public class ExcelReaderHelper implements IdataReader {
 	}
 
 	@Override
-	public Object[][] getData(String sheet, String... columnName)
+	public synchronized Object[][] getData(String sheet, String... columnName)
 			throws Exception {
 		List<Map<String, Object>> tableData = getTableData(sheet, columnName);
 
@@ -94,7 +95,7 @@ public class ExcelReaderHelper implements IdataReader {
 	}
 
 	@Override
-	public List<Map<String, Object>> getTableData(String sheetName)
+	public synchronized List<Map<String, Object>> getTableData(String sheetName)
 			throws Exception {
 		XSSFSheet sheet = wBook.getSheet(sheetName);
 		int totalCol = sheet.getRow(0).getLastCellNum();
@@ -134,7 +135,7 @@ public class ExcelReaderHelper implements IdataReader {
 	}
 
 	@Override
-	public List<Map<String, Object>> getTableData(String sheet,
+	public synchronized List<Map<String, Object>> getTableData(String sheet,
 			String... columnName) throws Exception {
 		List<Map<String, Object>> tableData = getTableData(sheet);
 		List<Map<String, Object>> filterData = new LinkedList<Map<String, Object>>();
