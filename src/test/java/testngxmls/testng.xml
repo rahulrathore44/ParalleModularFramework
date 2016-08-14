@@ -12,6 +12,7 @@
 			<class name="com.modular.parallel.TestDataProviderTwo" />
 			<class name="com.modular.parallel.TestYoutube" />
 			<class name="com.modular.parallel.TestFaceBook" />
+			<class name="com.modular.parallel.TestPageObjectModel" />
 		</classes>
 	</test>
 	<test name="Test - 2">
