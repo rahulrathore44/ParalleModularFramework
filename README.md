@@ -5,6 +5,19 @@ It also support the execution in grid enviroment.
 User need to setup node and hub manually and specify the details inside the xml file.
 Refer to the below example
 
+The framework has following features 
+
+1. Modular Design
+2. Maven based framework
+3. Log4j enabled for logging
+4. Report Generation (Excel & Extent reports) 
+5. Helper class to handle web component such as (Button,Link etc)
+6. Centralized Configuration (Using Properties file)
+7. POM
+8. Support reading the data form Excel and Database.
+9. Parallel Execution 
+10. Grid Support
+
 ###Here is the basic code:
 
 Extend your test class with TestCaseBase class, all the object to handle the web component will be available.
@@ -56,7 +69,7 @@ public class TestDropDown extends TestCaseBase {
 }
 ```
 
-### Use the testng.xml file to run the test case sequentially and parallely 
+### Use the testng.xml file to run the test cases sequentially or parallely 
 
 ```xml
 <suite name="Suite" parallel="tests" thread-count="5">
@@ -79,7 +92,7 @@ public class TestDropDown extends TestCaseBase {
 </suite>
 ```
 
-### Use the gridtestng.xml file to run the test case on grid. User need to setup the node and hub manually and sepcify the details in gridtestng.xml
+### Use the gridtestng.xml file to run the test cases on grid. User need to setup the node and hub manually and sepcify the details in gridtestng.xml
 
 ```xml
 <suite name="Suite" parallel="tests" thread-count="5">
