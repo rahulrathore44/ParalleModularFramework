@@ -1,13 +1,32 @@
 ###Paralle Modular Framework
 
 Selenium Modular Framework with Parallel execution support using Testng.
-It also support the execution in grid enviroment. Refer to the example.
+It also support the execution in grid enviroment.
 User need to setup node and hub manually and specify the details inside the xml file.
 Refer to the below example
 
 ###Here is the basic code:
 
 Extend your test class with TestCaseBase class, all the object to handle the web component will be available.
+
+```java
+try {
+			button = new ButtonHelper(dDriver);
+			alert = new AlertHelper(dDriver);
+			javaScript = new JavaScriptHelper(dDriver);
+			browser = new BrowserHelper(dDriver);
+			chkBox = new CheckBoxOrRadioButtonHelper(dDriver);
+			wait = new WaitHelper(dDriver, rReader);
+			dropDown = new DropDownHelper(dDriver);
+			link = new LinkHelper(dDriver);
+			navigate = new NavigationHelper(dDriver);
+			txtBox = new TextBoxHelper(dDriver);
+		} catch (Exception e) {
+			throw e;
+		}
+```
+
+Use the object directly to interact with web component
 
 ```java
 package com.modular.parallel;
@@ -88,4 +107,5 @@ public class TestDropDown extends TestCaseBase {
 ```
 
 ### To see this whole thing running simply checkout this project and run this command:
-mvn clean generate-sources test
+
+`mvn clean generate-sources test`
