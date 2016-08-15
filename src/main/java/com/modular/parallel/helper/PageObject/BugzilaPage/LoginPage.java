@@ -41,11 +41,12 @@ public class LoginPage extends PageBase {
 	@FindBy(how=How.ID,using="log_in")
 	private WebElement LoginBtn;
 	
-	public DetailPage clickLogin(final String username,final String password) {
+	public DetailPage clickLogin(final String username,final String password,boolean restrict) {
 		log.info("username : " + username + " password : " + password);
 		LoginTxtBx.sendKeys(username);
 		PassTxtBx.sendKeys(password);
-		RestricChk.click();
+		if (restrict)
+			RestricChk.click();
 		LoginBtn.click();
 		return new DetailPage(driver);
 	}
