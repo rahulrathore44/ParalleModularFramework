@@ -1,4 +1,4 @@
-###Paralle Modular Framework
+###Parallel Modular Framework
 
 Selenium Modular Framework with Parallel execution support using Testng.
 It also support the execution in grid enviroment.
